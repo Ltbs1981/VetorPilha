@@ -1,20 +1,37 @@
-﻿int [] pilha  = new int[5];
-
+﻿int[] pilha = new int[5];
 int topo = -1;
+Pop();
 
-static bool PilhaCheia()
+
+Push(5);
+Push(10);
+Push(15);
+Push(9);
+Push(200);
+Push(32);
+
+ExibirPilha();
+Pop();
+Pop();
+Pop();
+Pop();
+Pop();
+
+ExibirPilha();
+
+bool PilhaCheia()
 {
     return topo == pilha.Length - 1;
 }
 
-static bool PilhaVazia()
+bool PilhaVazia()
 {
     return topo == -1;
 }
 
-static void Push(int valor)
+void Push(int valor)
 {
-    if (IsFull())
+    if (PilhaCheia())
     {
         Console.WriteLine("Não é possível empilhar: a pilha está cheia.");
     }
@@ -26,23 +43,32 @@ static void Push(int valor)
     }
 }
 
-static int Pop()
+void Pop()
 {
-    if (IsEmpty())
+    if (PilhaVazia())
     {
-        Console.WriteLine("Não é possível desempilhar: a pilha está vazia.");
-        return -1; // Valor indicativo de falha
+        Console.WriteLine("a pilha está vazia.");
+        
     }
     else
     {
         int valor = pilha[topo];
         topo--;
         Console.WriteLine($"Item {valor} removido da pilha.");
-        return valor;
     }
 }
-
-
-
-
-
+void ExibirPilha()
+{
+    if (PilhaVazia())
+    {
+        Console.WriteLine("A pilha está vazia.");
+    }
+    else
+    {
+        Console.WriteLine("Exibindo a pilha");
+        for (int i = topo; i >= 0; i--)
+        {
+            Console.WriteLine(pilha[i]);
+        }
+    }
+}
